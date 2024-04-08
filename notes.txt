@@ -1,0 +1,922 @@
+🚀 Classes, Interfaces and OOP 
+ 
+ 
+👉 Classes 
+   Class is simply building block of software application. 
+   In Real world an application consists of multiple classes and each class is 
+   responsible for particular behaviour of the application. 
+   All the classes provide behaviour expected from the application. 
+ 
+ 
+   Object:- 
+   Object is an instance of a class. 
+   Class is a blueprint from which we can create object. 
+ 
+ 
+   Declaring class in C# 
+   public class Person 
+   { 
+     public string Name; // in real world applications we shouldn't declare fields with public 
+      
+     public void Introduce()  
+     { 
+        Console.WriteLine("Hi my name is" + Name); 
+     } 
+   } 
+ 
+ 
+   Creating Objects 
+   Person person = new Person(); 
+ 
+ 
+   var person = new Person(); 
+   person.Name = "Naveen"; 
+   person.Introduce(); 
+ 
+ 
+   Class Members 
+   In C# we have two types of class Members 
+   1. Instance Members 
+      Instance member is accesible from an object 
+      var person = new Person(); 
+      person.Introduce(); 
+   2. Static Members 
+      Static member is accesible from class 
+      Console.WriteLine(); // we are accessing directly from Console class without creating its instance 
+ 
+ 
+   Why use static members? 
+   To represent concepts that are singleton (means we need to have only one instance of that concept in the memory) 
+   DateTime.Now 
+   Console.WriteLine() 
+ 
+ 
+   Declaring Static Members 
+   public class Person 
+   { 
+     public static int PeopleCount = 0; 
+   } 
+ 
+ 
+👉 Constructors 
+   Constructor is a method that is called when an instance of a class is created.  
+   Why we need constructor ? 
+   To put an object in an early state (or initialize object) 
+   A constructor exatly has the same name as class, that's a requirement, if we try  
+   to change name compiler will not treat it as constructor 
+   Constructors does not have return type, not even void  
+   Inside constructor we can do any initialization that is required. 
+    
+   Note:  we always need not to use constructor, but to initialization object when 
+   created we need constructor.  
+ 
+ 
+   If we don't define default or parameter less constructor, C# compiler will do it for us, 
+   we will not see it but it exists, it will just initialize fields of the class to default 
+   values (like number it sets to 0, boolean sets to false etc) 
+ 
+ 
+   Declare a constructor 
+   public class Customer 
+   { 
+      public Customer() // parameter less or default constructor 
+      { 
+ 
+ 
+      } 
+   } 
+ 
+ 
+   public class Customer 
+   { 
+      public string Name; 
+ 
+ 
+      public Customer(string name)  
+      { 
+         this.Name = name; 
+      } 
+   } 
+ 
+ 
+   Constructor Overloading:- 
+   Overloading means having method by same name but different signatures. 
+   Method signature:- A signature is what uniquely identifies a method i.e 
+   its return type, name, number of parameters and their types. 
+ 
+ 
+   public class Customer  
+   { 
+      public Customer() 
+      { 
+         ... 
+      } 
+ 
+ 
+      public Customer(string name) 
+      { 
+         ... 
+      } 
+ 
+ 
+      public Customer(int id, string name) 
+      { 
+         ... 
+      } 
+   } 
+ 
+ 
+   Why do we need Overloading of the constructor ? 
+   To make initialization of this class easier 
+ 
+ 
+ 
+ 
+   Object initializers:- 
+   In C# there is another way to initialize objects, i.e using object initializer 
+ 
+ 
+   What ? 
+   Object initializer is a syntax for quickly initializing an object without need to call 
+   one of its constructors. 
+ 
+ 
+   Why ? 
+   To avoid creating multiple constructors 
+ 
+ 
+   How ? 
+   public class Person  
+   { 
+      public int Id; 
+      public string FirstName; 
+      public string LastName; 
+      public DateTime BirthDate; 
+   }  
+ 
+ 
+   with this class if we want to create constructor for different fields we may end up like below 
+   public class Person 
+   { 
+      public Person(int id){}; 
+ 
+ 
+      public Person(int id, string firstName){}; 
+ 
+ 
+      public Person(int id, string firstName, string lastName){}; 
+ 
+ 
+      public Person(int id, DateTime BirthDate){}; 
+   } 
+ 
+ 
+   this makes code messy, object initializer came to solve this problem, with object initializer we don't 
+   need any of these constructors, below is the example of Object initializer 
+ 
+ 
+   var person = new Person 
+                  { 
+                     FirstName = "Naveen" 
+                     LastName = "Buddhol" 
+                  };  
+    
+   👉Methods 
+     Signature of a method:- 
+     signature of a method is name, number and type of parameters 
+ 
+ 
+     public class Point 
+     { 
+      pubic void Move(int x, int y) {} 
+     }  
+ 
+ 
+     Overloading Methods:- 
+     Having a method with the same name but different signatures is called Method Overloading. 
+ 
+ 
+     public class Point 
+     { 
+      public void Move(int x, inty){}; 
+ 
+ 
+      public void Move(Point newLocation){}; 
+ 
+ 
+      public void Move(Point newLocation, int speed){};  
+     } 
+ 
+ 
+     A method with varying number of parameters:- 
+     public class Calculator 
+     { 
+      public int Add(params int[] numbers){}; 
+     } 
+ 
+ 
+     var result = calculator.Add(new int[]{1,2,3,4}); 
+     var result = calculator.Add(1,2,3,4); // with params modifier we can use this way of calling or above traditional way 
+ 
+ 
+     LINQ: Language Integrated Query // powerful feature in C# 
+ 
+ 
+   👉Fields 
+     Field is a variable that we declare at class level, we use it to store data about the class 
+      
+     Read only fields 
+     They will increase the robustness of the application 
+     we can create readonly field as follows 
+ 
+ 
+     public readonly string Name; 
+ 
+ 
+   👉Access Modifiers 
+     Different access modifiers we have are Public, Private, Protected, Internal, Protected Internal 
+ 
+ 
+     What ? 
+     Access modifier is a way to control access to a class and/or its members. 
+ 
+ 
+     Why ? 
+     To create safety or robustness in our programs 
+ 
+ 
+     Object-oriented programming 
+     Encapsulation / information hiding, Inheritance, Polymorphism 
+ 
+ 
+     Encapsulation / Information Hiding:- 
+     Hiding the details of the class(fields / methods) from outside is called Encapsulation 
+ 
+ 
+     Encapsulation in practice 
+     1. Define fields as Private 
+     2. Provide getter/setter methods as public 
+ 
+ 
+     Example:- 
+ 
+ 
+     public class Person 
+     { 
+      private string _name; 
+ 
+ 
+      public void SetName(string name) 
+      { 
+         if(!string.IsNullOrEmpty(name)) 
+            this._name = name; 
+      } 
+ 
+ 
+      public string GetName() 
+      { 
+         return _name; 
+      } 
+     } 
+      
+     we go with pascal case when ever we are naming classes or any of its methods and  
+     for fields convetion is to use camel case prefixed with underline. 
+ 
+ 
+     Though we are hiding data with private fields, we are accessing them through Public 
+     getter and setter methods, how this will be hiding data ? 
+ 
+ 
+     Encapsulation principle is that objects should hide the implementation details and  
+     reveal what they can do. 
+ 
+ 
+   👉Properties 
+     What is a property ? 
+     A class member that encapsulates a getter/setter for accessing a field. 
+ 
+ 
+     Why ? 
+     To create a getter/setter with less code. 
+ 
+ 
+     How ? 
+     public class Person 
+     { 
+       private DateTime _birthdate; 
+ 
+ 
+       public DateTime BirthDate 
+       { 
+         get {return _birthdate}; 
+         set {_birthdate = value}; 
+       } 
+     } 
+ 
+ 
+     Auto-implemented properties 
+     public class Person 
+     { 
+        public DateTime BirthDate { get; set; } 
+     } 
+ 
+ 
+     All our auto-implemented properties need to be on top, then vertical seperator, 
+     then constructor and calculated properties at bottom 
+ 
+ 
+     ex:- 
+     public class Employee 
+      { 
+         public string Name { get; set; } 
+         public string Username { get; set; } 
+         public DateTime BirthDate {get; private set; } // private set means it is readonly, we cannot change it, we set in constructor 
+ 
+ 
+         public Employee(DateTime birthdate) 
+            {    
+               BirthDate = birthdate; 
+            } 
+ 
+ 
+         public int Age  
+            { 
+                  get 
+                  { 
+                     var timespan = DateTime.Today - BirthDate; 
+                     var years = timespan.Days/365; 
+                      
+                     return years; 
+                  } 
+            } 
+      } 
+ 
+ 
+👉 Indexers 
+   What ? 
+   Indexers is a way to access elements in a class that represents a list of values 
+ 
+ 
+   ex:- 
+   var cookie = new HttpCookie(); 
+   cookie.Expire = DateTime.Today.AddDays(5); 
+ 
+ 
+   cookie["name"] = "Naveen"; 
+   cookie.SetItem("name", "Naveen"); 
+ 
+ 
+   var name = cookie["name"]; 
+   var name = cookie.GetItem("name"); 
+ 
+ 
+   Indexer is nothing but a property, we declare indexer just like another property 
+ 
+ 
+   public class HttpCookie 
+   { 
+      public string this[string key] 
+      { 
+         get{...} 
+         set{...} 
+      } 
+   } 
+      
+🚀 Class Coupling 
+   What is coupling ? 
+   Coupling is a measure of how interconnected classes and subsystems are. 
+ 
+ 
+   If dependency is high i.e if we are changing more number of classes on changing 
+   one class, it is called tightly coupled and it is bad. 
+ 
+ 
+   We need to build loosely coupled classes. 
+ 
+ 
+   How ? 
+   To build loosely coupled application we need to understand 
+   1. Encapsulation 
+   2. The relation between classes 
+   3. Interfaces 
+ 
+ 
+   Types of relationships 
+   1. Inheritance 
+   2. Composition 
+ 
+ 
+   👉 Inheritance 
+   A kind of relation between two classes that allows one to inherit code from the 
+   other. 
+   Inheritance is referred to as IS-A relationship 
+   Ex:- A car is a vehicle 
+ 
+ 
+   With Inheritance we can code re-use, polymorhic behaviour 
+ 
+ 
+   syntax 
+   public class PresentationObject 
+   { 
+      // common shared code 
+   } 
+ 
+ 
+   public class Text : PresentationObject 
+   { 
+      // code specified to Text 
+   } 
+ 
+ 
+   👉 Composition 
+   Composition is a kind of relationship between two classes that allows one to contain the 
+   other. 
+ 
+ 
+   Composition is referred to as Has-a relationship 
+   ex:- Car has a engine 
+ 
+ 
+   With Composition we get code re-use, flexibilty, a means to loose-coupling 
+ 
+ 
+   Examples 
+   1. DbMigrator requires logging 
+   DbMigrator is a class responsible for creating tables, populating tables with data, dropping columns 
+   etc. As part of that it requires some logging  
+   2. Installer requries logging 
+ 
+ 
+   syntax 
+   public class Installer 
+   { 
+      private Logger _logger; 
+ 
+ 
+      public Installer(Logger logger) 
+      { 
+         _logger = logger; 
+      } 
+   }  
+ 
+ 
+   public class DbMigrator 
+   { 
+      private Logger _logger; 
+ 
+ 
+      public DbMigrator(Logger logger) 
+      { 
+         _logger = logger; 
+      } 
+   }  
+ 
+ 
+   Inheritance results in tight coupling, where as Composition gives flexibilty and loosely coupled classes, 
+   so as a result most people prefer Composition over Inheritance 
+ 
+ 
+   Favor Composition over Inheritance :- 
+   Any inheritance relationship can be translated to Composition 
+ 
+ 
+   Benefits of Composition 
+   1. flexibilty 
+   2. loose coupling 
+ 
+ 
+   Two types of relation between classes is Is-a and Has-a 
+ 
+ 
+   Inheritance pros and cons 
+   pros - code re-use, easier to understand 
+   cons - tightly coupled, fragile and can be abused 
+ 
+ 
+🚀 Inheritance - second pillar of OOP 
+ 
+ 
+   👉 Access Modifiers 
+   We want to design classes like black box which has limited visibility from outside, 
+   there could be lot going on inside black box. 
+ 
+ 
+   What we see from outside is called public interface 
+ 
+ 
+   Access modifiers we have in C# are 
+   1. public 
+   2. private 
+   3. protected 
+   4. internal 
+   5. protected internal 
+ 
+ 
+   public is accesible from everywhere. 
+   private is accesible only from the class and not accesible outside class. 
+   protected is accesible only from class and its derived classes (breaks encapsulation) avoid it and only use if we have 
+   valid reason. 
+   internal is the modifier we often use for classes but not for class members, it is accesible only from same assembly 
+   protected internal is accesible only from same assembly or from derived classes, we can use it for class members 
+ 
+ 
+ 
+ 
+   ex- 
+   public class Customer 
+   { 
+      public void Promote() 
+      { 
+         //... 
+      } 
+ 
+ 
+      private int CalculateRating() 
+      { 
+         //... 
+      } 
+   } 
+ 
+ 
+   var customer = new Customer(); 
+   customer.Promote(); // accesible and makes sense 
+   customer.CalculateRating(); // private and not accesible as calculate rating should is kept personal, it is accesible only from class 
+ 
+ 
+   Constructors and Inheritance:- 
+   Base class constructors are always executed first 
+   Base class construcotrs are not inherited 
+ 
+ 
+   public class vehicle 
+   { 
+      private string _registrationNumber; 
+ 
+ 
+      public Vehicle(string registrationNumber) 
+      { 
+         _registrationNumber = registrationNumber; 
+      } 
+   } 
+ 
+ 
+   public class Car 
+   { 
+      public Car(string registrationNumber) 
+         :base(registrationNumber) 
+      { 
+         // ... 
+      } 
+   } 
+ 
+ 
+   Upcasting and Downcasting :- 
+   Conversion from derived class to base class is called Upcasting. 
+   Conversion from base class to derived class is called Downcasting. 
+ 
+ 
+   public class Shape 
+   { 
+ 
+ 
+   } 
+ 
+ 
+   public class Circle : Shape 
+   { 
+ 
+ 
+   } 
+ 
+ 
+   Circle circle = new Circle(); 
+ 
+ 
+   Shape shape = circle; // upcasting no Conversion required 
+ 
+ 
+   Circle anotherCircle = (Circle)shape; // Downcasting  
+ 
+ 
+   Car car = (Car)shape; // throws invalidcastexception 
+ 
+ 
+   To prevent above exception we use as keyword 
+ 
+ 
+   Car car = obj as Car; // safest way, if object cannot be converted to expected type it will return null 
+ 
+ 
+   if(car != null){ 
+      ... 
+   } 
+ 
+ 
+   We also have is keyword, with is keyword we can check whether object is of certain type 
+ 
+ 
+   if(obj is Car) 
+   { 
+      Car car = (Car) obj; // safe way 
+      ... 
+   } 
+ 
+ 
+   Boxing and Unboxing:- 
+   Value types are stored on the stack. 
+   ex:- all primitive types: byte, int, char, bool, float, bool 
+   the struct type 
+ 
+ 
+   values stored in stack have short life time, which means as soon as they go out of the scope 
+   they immediately get kicked out of stack by runtime. 
+ 
+ 
+   Reference types are stored in the heap, which is larger amount of memory 
+ 
+ 
+   we use heap to store objects for longer life time 
+   ex:- Any classes (Object, Array, String, DbMigrator, etc) 
+ 
+ 
+   An object reference can be implicitly converted to a base class reference. 
+ 
+ 
+   Circle circle = new Circle(); 
+   Shape shape = circle; // upcasting, implicit conversion 
+ 
+ 
+   We all know that Object class is base class of all classes in .NET framework 
+ 
+ 
+   Boxing :- The process of converting a value type instance to an object reference is called Boxing 
+ 
+ 
+   int number = 10; 
+   object obj = number; 
+   or 
+   Object obj = 10; 
+ 
+ 
+   int number = (int)obj; // Unboxing 
+ 
+ 
+   Boxing and Unboxing has performance issues  
+ 
+ 
+   👉 Polymorphism 
+   Method Oeverriding :- Modifying the implementation of inherited method is called method overriding. 
+   The implementation does not apply to derived class. 
+ 
+ 
+   public class Shape 
+   { 
+      public void Draw() 
+      { 
+ 
+ 
+      } 
+   } 
+ 
+ 
+   public class Circle : Shape 
+   { 
+ 
+ 
+   } 
+ 
+ 
+   public class Image : Shape 
+   { 
+ 
+ 
+   } 
+ 
+ 
+   we can do method overriding in C# with the help of virtual and override keywords 
+ 
+ 
+   public class Shape 
+   { 
+      public virtual void Draw() 
+      { 
+         // Default implementation 
+      }  
+   } 
+ 
+ 
+   public class Image : Shape 
+   { 
+      public override void Draw() 
+      { 
+         // New Implementation 
+      } 
+   } 
+ 
+ 
+   This technique is one way to implement polymorphic behaviour in C# 
+ 
+ 
+   poly in greek means many, morph means forms, polymorhic means many forms 
+ 
+ 
+   Abstract Classes and Members :- 
+   Abstract modifier indicates that a class or a member is missing implementation. 
+ 
+ 
+   whenever we declare a member of class as abstract, we need to declare that class also as abstract class. 
+ 
+ 
+   public abstract class Shape 
+   { 
+      public abstract void Draw(); // indicates that this class member is missing implementation 
+   } 
+ 
+ 
+   public class Circle : Shape 
+   { 
+      public override void Draw() 
+      { 
+         // implementation of circle 
+      } 
+   } 
+ 
+ 
+   Rules for abstract members 
+   1. Do not include implementation 
+      public abstract void Draw(); 
+   2. If a member is declared as abstract, the containing class needs to be declared as abstract too. 
+      public abstract class Shape 
+      { 
+         public abstract void Draw(); 
+      } 
+   3. In Derived class all abstract members in base class must be implemented. 
+      public class Circle : Shape 
+      { 
+         public override void Draw() 
+         { 
+            // implementation 
+         } 
+      } 
+   4. Abstract classes cannot be instantiated 
+      var shape = new Shape(); // won't compile 
+    
+   Why to use abstract ? 
+   We want to use abstract class when we want to provide some common behaviour, while forcing  
+   other developers to follow your design. 
+ 
+ 
+   Sealed Modifier 
+   prevents derivation of classes or overriding of methods 
+ 
+ 
+   Why do we need sealed modifier ? 
+   sealed classes are slightly faster because of some run-time optimizations 
+ 
+ 
+   Exercise:- Design database connection 
+ 
+ 
+   To access a database, we need to open a connection to it and close it once job is done. 
+   Connecting to a database depends on the type of the target database and the database managment system (DBMS) 
+   For example connecting to SQL server database is different from connecting to oracle database, but both these 
+   connections have few things in common 
+ 
+ 
+   1. They have connection string 
+   2. They can be opened 
+   3. They can be closed 
+   4. They may have timeout attribute (so if the connection could not be opened within the timeout, an exception 
+      will be thrown) 
+    
+ 
+ 
+   DbConnection.cs 
+ 
+ 
+   namespace Classes 
+   { 
+      public abstract class DbConnection 
+      { 
+         public string ConnectionString { get; set; } 
+         public TimeSpan Timeout { get; set; } 
+         public DbConnection(string connStr) 
+         { 
+               if(connStr != null){ 
+                  ConnectionString = connStr; 
+               }else{ 
+                  throw new InvalidDataException("Connection string cannot be null."); 
+               } 
+         } 
+         public abstract void OpenConnection(); 
+         public abstract void CloseConnection(); 
+      } 
+   } 
+ 
+ 
+   SqlConnection.cs 
+ 
+ 
+   namespace Classes 
+   { 
+      public class SqlConnection : DbConnection 
+      { 
+         public SqlConnection(string connStr) : base(connStr) 
+         { 
+         } 
+         public override void OpenConnection() 
+         { 
+               Console.WriteLine("Open SQL Connection: {0}", ConnectionString); 
+         } 
+         public override void CloseConnection() 
+         { 
+               Console.WriteLine("Close SQL Connection: {0}", ConnectionString); 
+         } 
+      } 
+   } 
+ 
+ 
+   OracleConnection.cs 
+ 
+ 
+   namespace Classes 
+   { 
+      public class OracleConnection : DbConnection 
+      { 
+         public OracleConnection(string connStr):base(connStr) 
+         { 
+         } 
+         public override void OpenConnection() 
+         { 
+               Console.WriteLine("Open Oracle Connection: {0}", ConnectionString); 
+         } 
+         public override void CloseConnection() 
+         { 
+               Console.WriteLine("Close Oracle Connection: {0}", ConnectionString); 
+         } 
+      } 
+   } 
+ 
+ 
+   Exercise :- Design a database command 
+ 
+ 
+   DbCommand cannot be executed without having connection to database. 
+ 
+ 
+   namespace Classes 
+   { 
+      public class DbCommand : DbConnection 
+      { 
+         public string Instruction { get; set; } 
+         public DbCommand(string connStr, string ins):base(connStr) 
+         {            
+               Instruction = ins; 
+         } 
+         public override void OpenConnection() 
+         { 
+               Console.WriteLine("Opened Connection: {0}", ConnectionString); 
+         } 
+         public void Execute() 
+         { 
+               Console.WriteLine("Executed the instruction: {0}", Instruction); 
+         } 
+         public override void CloseConnection() 
+         { 
+               Console.WriteLine("Closed Connection: {0}", ConnectionString); 
+         } 
+      } 
+   } 
+ 
+ 
+   👉 Interfaces 
+   What is interface ? 
+   Interface is a language construct that is similar to a class (in terms of syntax) 
+   but is fundamentally different. 
+ 
+ 
+   syntax 
+ 
+ 
+   public interface ITaxCalculator 
+   { 
+      int calculate(); 
+   } 
+ 
+ 
+   unlike classes interfaces donot have implementation, access modifiers. 
+ 
+ 
+   Why do we need interfaces ? 
+   To build loosely coupled applications 
+ 
+ 
+   While building software we want our classes or components to be loosely related or dependant on each other 
+ 
+ 
+   Interfaces will help in Testability and Extensibility of the application. 
+ 
+ 
+ 
+
